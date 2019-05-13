@@ -17,9 +17,9 @@ Furthermore can be configured to extract and add article tags from the link (eit
  * Unpack the [zip-File](https://github.com/Niehztog/ttrss_plugin-article_link_enhancer/archive/master.zip)
  * Move the folder `"article_link_enhancer"` to your plugins directory
  * Enable the `article_link_enhancer` plugin in the Tiny Tiny RSS Preferences and reload.
- * In order to activate and customize the plugin for a feed, right click the Feed, select `"Edit Feed"` and then `"Plugins"`. Here you can choose to resolve the redirects, enter a regular expression for tag extraction (don't forget to have a capture group in there) and set a prefix.
+ * In order to activate and customize the plugin for a feed, right click the Feed, select `"Edit Feed"` and then `"Plugins"`. Here you can choose to resolve the redirects, enter a regular expression for tag extraction (don't forget to have a capture group in there, for example `/{1}([a-z]+)/{1}`) and set a prefix.
  
-**Caution:** *Enabling redirect resolging slightly increases feeds update times.*
+**Caution:** *Enabling redirect resolving slightly increases feeds update times.*````
 
 Please report any problems you might encounter using github's [issue tracker](https://github.com/Niehztog/ttrss_plugin-article_link_enhancer/issues).
 
