@@ -85,16 +85,16 @@ class article_link_enhancer extends Plugin
     function handle_regexp_tags($article, $pattern, $tag_prefix, $replace_existing)
     {
         $link = $article['link'];
-        $hits = preg_match('~' . $pattern . '~', $link, $matches);
+        $hits = preg_match_all('~' . $pattern . '~', $link, $matches);
         if($hits == 0 || count($matches) == 1) {
             return $article;
         }
 
-        array_shift($matches);
+        //array_shift($matches);
         if($replace_existing) {
             $article['tags'] = array();
         }
-        foreach($matches as $match) {
+        foreach($matches[1] as $match) {
             array_push($article['tags'], $tag_prefix . $match);
         }
         $article['tags'] = array_unique($article['tags']);
@@ -234,9 +234,12 @@ class article_link_enhancer extends Plugin
      */
     private function save_regexp_tags($feed_id)
     {
-        $regexp_tags = $this->read_setting(self::SETTING_NAME_REGEXP_TAGS);
+        $regexp = $_POST["reg_exp_tags"];
+        if(!$this->is_valid_regex($regexp)) {
+            return;
+        }
 
-        $regexp = clean($_POST["reg_exp_tags"]);
+        $regexp_tags = $this->read_setting(self::SETTING_NAME_REGEXP_TAGS);
 
         if (!empty($regexp)) {
             $regexp_tags[$feed_id] = $regexp;
@@ -297,6 +300,11 @@ class article_link_enhancer extends Plugin
         $value = $this->host->get($this, $name);
         if (!is_array($value)) $value = array();
         return $value;
+    }
+
+    private function is_valid_regex($pattern)
+    {
+        return is_int(@preg_match('~'.$pattern.'~', ''));
     }
 
 }
