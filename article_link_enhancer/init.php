@@ -276,7 +276,7 @@ class article_link_enhancer extends Plugin
         $replace_existing = $this->host->get($this, self::SETTING_NAME_REPLACE_EXISTING);
         if (!is_array($replace_existing)) $replace_existing = array();
 
-        $enable = checkbox_to_sql_bool($_POST["replace_existing_enabled"]);
+        $enable = checkbox_to_sql_bool($_POST["replace_existing_enabled"]??'');
         $key = array_search($feed_id, $replace_existing);
 
         if ($enable) {
