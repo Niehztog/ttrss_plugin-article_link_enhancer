@@ -213,7 +213,7 @@ class article_link_enhancer extends Plugin
         $resolve_redirects = $this->host->get($this, self::SETTING_NAME_RESOLVE_REDIRECTS);
         if (!is_array($resolve_redirects)) $resolve_redirects = array();
 
-        $enable = checkbox_to_sql_bool($_POST["resolve_redirects_enabled"]);
+        $enable = checkbox_to_sql_bool($_POST["resolve_redirects_enabled"]??'');
         $key = array_search($feed_id, $resolve_redirects);
 
         if ($enable) {
